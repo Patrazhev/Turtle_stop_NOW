@@ -27,6 +27,7 @@ def ButtonEventCallback(data):
 
 def Kill_switchP1V1():
     rospy.init_node("Kill_switchP1V1") #initializes the node
+    rospy.loginfo('node initilized')
     rospy.Subscriber("/mobile_base/events/button",ButtonEvent,ButtonEventCallback) #subscribes
 
     state_count = 0 # initializes the state variable
@@ -34,12 +35,12 @@ def Kill_switchP1V1():
 
     motor_pub = rospy.Publisher("/mobile_base/commands/motor_power",/kobuki_msgs.msg.MotorPower,queue_size=10)
     led_pub = rospy.Publisher("/mobile_base/commands/Led",/kobuki_msgs.msg.Value,queue_size=10)
-
+    
     # pass LED message == 1
     led_pub.publish(kobuki_msgs.msg.Value(1))
     #start the if loop
     if state = 'pressed':  #button event registered
-
+            rospy.loginfo("Button Press detected")
             if state_count = 0:
                     #pass the LED message == 3
                     led_pub.publish(kobuki_msgs.msg.Value(3))
