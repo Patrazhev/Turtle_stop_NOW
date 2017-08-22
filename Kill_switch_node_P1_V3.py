@@ -24,6 +24,10 @@ class Kill_switchP1V3:
         self.led_pub.publish(1)
         self.motor_pub.publish(1)
 
+    def __del__(self):
+        self.led_pub.publish(0)
+
+
     def ButtonEventCallback(self,data):
         if ( data.state == ButtonEvent.RELEASED ):
                 self.state = "released"
@@ -36,12 +40,18 @@ class Kill_switchP1V3:
                     self.led_pub.publish(3)
                     self.motor_pub.publish(0)
                     self.state_count = 1
+                    rospy.loginfo('Motors have been halted')
                 else:
                     #Green LED and Motor on
                     self.led_pub.publish(1)
                     self.motor_pub.publish(1)
                     self.state_count = 0
+                    rospy.loginfo('Motors have been activated')
 
 def main():
     KsP1V3 = Kill_switchP1V3()
+    rospy.loginfo('Deadman switch is active')
     rospy.spin()
+
+if __name__ == '__main__':
+    main()
