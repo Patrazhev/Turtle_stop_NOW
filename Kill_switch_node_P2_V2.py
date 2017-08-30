@@ -43,7 +43,7 @@ class Kill_switch_P2_V2:
                             self.Kill_off()
 
             def JoyEventCallback(self, data):
-                if data.buttons(2) = 1:
+                if data.buttons[2] = 1:
                     #start by the same as the button
                     self.Kill_on()
 
